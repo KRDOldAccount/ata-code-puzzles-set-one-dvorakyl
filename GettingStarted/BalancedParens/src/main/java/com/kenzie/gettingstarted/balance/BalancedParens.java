@@ -90,7 +90,53 @@ public class BalancedParens {
      * @return True as described in the classroom, false otherwise.
      */
     public boolean yourMethodHere(String text) {
-        return false;
+        Deque<Character> stack = new ArrayDeque<Character>();
+        Deque<Character> unused = new ArrayDeque<Character>();
+        for (char c: text.toCharArray()) {
+            if (c != '(' && c != ')' && c !='[' && c != ']' && c != '{' && c !='}' && c != ':') {
+                unused.push(c);
+                continue;
+            }
+            if (c == ':') {
+                stack.push(c);
+            }
+            if (c == '(' || c == '[' || c == '{') {
+                if (stack.isEmpty() || stack.getLast() != ':') {
+                    stack.push(c);
+                    continue;
+                }
+                stack.pop();
+                continue;
+            }
+            if(stack.isEmpty()) {
+                return false;
+            }
+            char check;
+            switch (c) {
+                case ')':
+                    check = stack.pop();
+                    if (check == '{' || check == '[') {
+                        return false;
+                    }
+                    break;
+
+                case '}':
+                    check = stack.pop();
+                    if (check == '(' || check == '[') {
+                        return false;
+                    }
+                    break;
+
+                case ']':
+                    check = stack.pop();
+                    if (check == '(' || check == '{') {
+                        return false;
+                    }
+                    break;
+            }
+        }
+
+        return (stack.isEmpty());
     }
 
 }
