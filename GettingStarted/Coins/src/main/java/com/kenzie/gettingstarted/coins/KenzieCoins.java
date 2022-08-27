@@ -33,6 +33,14 @@ public class KenzieCoins {
      * @return True if any two values sum to the provided balance, false otherwise.
      */
     public boolean anyPairSumsToBalance(int balance, List<Integer> values) {
+        for(int i = 0; i < values.size(); ++i) {
+            for(int j = i + 1; j < values.size(); ++j) {
+                if(values.get(i) + values.get(j) == balance) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -46,7 +54,16 @@ public class KenzieCoins {
      * @return A list of pairs of numbers from `values` that sum to the `balance`.
      */
     public List<Pair> findPairsThatSumToBalance(int balance, List<Integer> values) {
-        return new ArrayList<>();
+        List<Pair> correct = new ArrayList<>();
+        for(int i = 0; i < values.size(); ++i) {
+            for(int j = i + 1; j < values.size(); ++j) {
+                if(values.get(i) + values.get(j) == balance) {
+                    Pair pair = new Pair(values.get(i), values.get(j));
+                    correct.add(pair);
+                }
+            }
+        }
+        return correct;
     }
 
 }
