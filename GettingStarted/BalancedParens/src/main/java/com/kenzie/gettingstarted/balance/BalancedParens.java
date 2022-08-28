@@ -93,15 +93,27 @@ public class BalancedParens {
         Deque<Character> stack = new ArrayDeque<Character>();
         Deque<Character> unused = new ArrayDeque<Character>();
         for (char c: text.toCharArray()) {
-            if (c != '(' && c != ')' && c !='[' && c != ']' && c != '{' && c !='}' && c != ':') {
+
+            if (c == ' ') {
+                if (!stack.isEmpty() && stack.getFirst() == ':') {
+                    stack.pop();
+                    continue;
+                }
+            }
+
+            if (c != '(' && c != ')' && c !='[' && c != ']' && c != '{' && c !='}') {
+                if (c == ':') {
+                    if (stack.isEmpty() || stack.getFirst() != ':') {
+                        stack.push(c);
+                    }
+                }
                 unused.push(c);
                 continue;
             }
-            if (c == ':') {
-                stack.push(c);
-            }
+
+
             if (c == '(' || c == '[' || c == '{') {
-                if (stack.isEmpty() || stack.getLast() != ':') {
+                if (stack.isEmpty() || stack.getFirst() != ':') {
                     stack.push(c);
                     continue;
                 }
