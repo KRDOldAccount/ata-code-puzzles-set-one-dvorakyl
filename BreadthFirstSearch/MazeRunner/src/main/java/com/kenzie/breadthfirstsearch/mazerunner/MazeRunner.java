@@ -84,8 +84,10 @@ public class MazeRunner {
             Node<MazeSpace> currentSpace = currentPath.get(currentPath.size() - 1);
 
             if(currentSpace.getValue().isExit()) {
-
-                return currentPath;
+                for (Node<MazeSpace> cp: currentPath) {
+                    answer.add(cp.getValue());
+                }
+                return answer;
             }
 
             visited.add(currentSpace);
@@ -96,10 +98,6 @@ public class MazeRunner {
                     .map(neighbor -> addToPath(currentPath, neighbor))
                     .collect(Collectors.toList()));
         }
-
-//        return Collections.emptyList();
-
-//        return Optional.empty();
 
         return Collections.emptyList();
     }
