@@ -33,7 +33,6 @@ public class IslandCounter {
      */
     public int countIslands() {
 
-
         if (this.map == null || this.height == 0) {
             return 0;
         }
@@ -69,13 +68,14 @@ public class IslandCounter {
                             neighbors.add(row * nc + col+1);
                             this.map[row][col+1] = 0;
                         }
+                        if (row + 1 < nr && col - 1 >= 0 && this.map[row+1][col-1] == 1) {
+                            neighbors.add((row+1) * nc + col-1);
+                            this.map[row+1][col-1] = 0;
+                        }
                     }
                 }
             }
         }
-
         return num_islands;
-
-//        return 0;
     }
 }
