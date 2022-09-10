@@ -52,7 +52,5 @@ public class KRepeatingElements {
         }
         return countAtLeastK == countLetters;
 
-
-//        return -1;
     }
 }
