@@ -23,6 +23,7 @@ public class MinimumWindowSubstring {
      * @param t - the string containing all the characters that must appear in the substring from s.
      * @return the shortest substring of s in which each character in t appears.
      */
+    //helped by Zhora as well as leetcode on this problem
     public static String minimumWindowSubstring(String s, String t) {
 
         if (s.length() == 0 || t.length() == 0) {
