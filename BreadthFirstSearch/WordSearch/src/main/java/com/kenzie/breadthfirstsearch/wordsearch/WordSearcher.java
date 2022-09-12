@@ -43,16 +43,31 @@ public class WordSearcher {
     public Map<String, Long> calculateWordCounts() {
 
         HashMap<String, Long> answer = new HashMap<>();
-        Coordinate start = new Coordinate(0,0);
+//        Coordinate start = new Coordinate(0,0);
         List<String> listOfWords = new ArrayList<>();
         listOfWords = this.wordSearch.getWordsToFind();
 
+
+
         for (String wordToSearch: listOfWords) {
-            answer.put(wordToSearch, bfs(wordToSearch, start));
+            answer.put(wordToSearch, bfsHelper(wordToSearch));
         }
 
         return answer;
     }
+
+    public long bfsHelper(String s) {
+        long wordCount2 = 0;
+        for (int i = 0; i < wordSearch.getHeight(); i++) {
+            for (int j = 0; j < wordSearch.getWidth(); j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                wordCount2 += bfs(s, coordinate);
+
+            }
+        }
+        return wordCount2;
+    }
+
 
     public long bfs(String word, Coordinate origin) {
         long wordCount = 0;
